@@ -1,0 +1,1521 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{!}pip install \PYZhy{}U okpy  \PYZsh{} Uncomment \PY{k}{if} you have an error
+        \PY{k+kn}{from} \PY{n+nn}{client}\PY{n+nn}{.}\PY{n+nn}{api}\PY{n+nn}{.}\PY{n+nn}{notebook} \PY{k}{import} \PY{n}{Notebook}
+        \PY{n}{ok} \PY{o}{=} \PY{n}{Notebook}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hw1.ok}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Collecting okpy
+  Using cached okpy-1.18.1-py3-none-any.whl (107 kB)
+Collecting certifi==2019.11.28
+  Using cached certifi-2019.11.28-py2.py3-none-any.whl (156 kB)
+Collecting filelock==3.0.12
+  Using cached filelock-3.0.12-py3-none-any.whl (7.6 kB)
+Requirement already satisfied: chardet==3.0.4 in /Users/sjk/anaconda3/envs/data100/lib/python3.6/site-packages (from okpy) (3.0.4)
+Collecting ast-scope==0.3.1
+  Using cached ast\_scope-0.3.1-py3-none-any.whl
+Collecting requests==2.22.0
+  Using cached requests-2.22.0-py2.py3-none-any.whl (57 kB)
+Collecting coverage==4.4
+  Using cached coverage-4.4-cp36-cp36m-macosx\_10\_10\_x86\_64.whl (172 kB)
+Collecting pytutor==1.0.0
+  Using cached pytutor-1.0.0-py3-none-any.whl
+Collecting colorama==0.4.3
+  Using cached colorama-0.4.3-py2.py3-none-any.whl (15 kB)
+Collecting display-timedelta==1.1
+  Using cached display\_timedelta-1.1-py3-none-any.whl
+Collecting attrs==19.3.0
+  Using cached attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting pyaes==1.6.1
+  Using cached pyaes-1.6.1-py3-none-any.whl
+Collecting urllib3==1.25.7
+  Using cached urllib3-1.25.7-py2.py3-none-any.whl (125 kB)
+Collecting idna==2.8
+  Using cached idna-2.8-py2.py3-none-any.whl (58 kB)
+\textcolor{ansi-yellow}{WARNING: Error parsing requirements for urllib3: [Errno 2] No such file or directory: '/Users/sjk/anaconda3/envs/data100/lib/python3.6/site-packages/urllib3-1.26.4.dist-info/METADATA'}
+Installing collected packages: urllib3, idna, certifi, attrs, requests, pytutor, pyaes, filelock, display-timedelta, coverage, colorama, ast-scope, okpy
+  Attempting uninstall: urllib3
+    Found existing installation: urllib3 1.26.4
+\textcolor{ansi-red}{ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory: '/Users/sjk/anaconda3/envs/data100/lib/python3.6/site-packages/urllib3-1.26.4.dist-info/RECORD'
+}
+
+    \end{Verbatim}
+
+    \section{HW 1: Math Review and
+Plotting}\label{hw-1-math-review-and-plotting}
+
+\subsection{Due Date: Fri 3/26, 11:59
+PM}\label{due-date-fri-326-1159-pm}
+
+    \textbf{Collaboration Policy:} You may talk with others about the
+homework, but we ask that you \textbf{write your solutions
+individually}. If you do discuss the assignments with others, please
+\textbf{include their names} in the following line.
+
+\textbf{Collaborators}: \emph{list collaborators here (if applicable)}
+
+    \subsection{This Assignment}\label{this-assignment}
+
+This homework is to help you diagnose your preparedness for the course.
+The rest of this course will assume familiarity with the programming and
+math concepts covered in this homework. Please consider reviewing
+prerequisite material if you struggle with this homework.
+
+\subsection{Score Breakdown}\label{score-breakdown}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Question & Points\tabularnewline
+\midrule
+\endhead
+1 & 1\tabularnewline
+2a & 1\tabularnewline
+2b & 1\tabularnewline
+2c & 1\tabularnewline
+2d & 1\tabularnewline
+3a & 4\tabularnewline
+3b & 2\tabularnewline
+4a & 2\tabularnewline
+4b & 2\tabularnewline
+5 & 2\tabularnewline
+6a & 2\tabularnewline
+6b & 1\tabularnewline
+6c & 1\tabularnewline
+7 & 5\tabularnewline
+Total & 30\tabularnewline
+\bottomrule
+\end{longtable}
+
+    Here are some useful Jupyter notebook keyboard shortcuts. To learn more
+keyboard shortcuts, go to \textbf{Help -\textgreater{} Keyboard
+Shortcuts} in the menu above.
+
+Here are a few we like: 1. \texttt{ctrl}+\texttt{return} :
+\emph{Evaluate the current cell} 1. \texttt{shift}+\texttt{return}:
+\emph{Evaluate the current cell and move to the next} 1. \texttt{esc} :
+\emph{command mode} (may need to press before using any of the commands
+below) 1. \texttt{a} : \emph{create a cell above} 1. \texttt{b} :
+\emph{create a cell below} 1. \texttt{dd} : \emph{delete a cell} 1.
+\texttt{m} : \emph{convert a cell to markdown} 1. \texttt{y} :
+\emph{convert a cell to code}
+
+    \subsubsection{Initialize your
+environment}\label{initialize-your-environment}
+
+This cell should run without error if you have \textbf{set up your
+personal computer correctly}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fivethirtyeight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}\PY{p}{,} \PY{n}{Latex}\PY{p}{,} \PY{n}{Markdown}
+\end{Verbatim}
+
+
+    \subsection{Python}\label{python}
+
+\subsubsection{Question 1 (1 pt)}\label{question-1-1-pt}
+
+Recall the formula for population variance below:
+
+\[\texttt{Mean}({\bf{x}}) = \mu = \frac{1}{N}\sum_{i=1}^N x_i\]
+
+\[\texttt{Var}({\bf{x}}) = \sigma^2 = \frac{1}{N}\sum_{i=1}^N (x_i - \mu)^2\]
+
+Complete the functions below to compute the variance of
+\texttt{population}, an array of numbers. For this question, do not use
+built-in NumPy functions (i.e. \texttt{np.mean} and \texttt{np.var});
+instead we will use NumPy to verify your code.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{mean}\PY{p}{(}\PY{n}{population}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Compute the mean of population (mu).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        population: a numpy array of numbers of shape [N,]}
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        the mean of population (mu).}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} Calculate the mean of a population}
+            \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+            \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+            \PY{n}{total}\PY{o}{=}\PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{N} \PY{o+ow}{in} \PY{n}{population}\PY{p}{:}
+                \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{n}{N}
+            \PY{k}{return} \PY{n}{total}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{population}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+            \PY{c+c1}{\PYZsh{} END YOUR CODE}
+        
+        \PY{k}{def} \PY{n+nf}{variance}\PY{p}{(}\PY{n}{population}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Compute the variance of population (sigma squared).}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Args:}
+        \PY{l+s+sd}{        population: a numpy array of numbers of shape [N,]}
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        the variance of population}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{c+c1}{\PYZsh{} Calculate the variance of a population}
+            \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+            \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+            \PY{n}{total} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{m} \PY{o}{=} \PY{n}{mean}\PY{p}{(}\PY{n}{population}\PY{p}{)}
+            \PY{k}{for} \PY{n}{N} \PY{o+ow}{in} \PY{n}{population}\PY{p}{:}
+                \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{m} \PY{o}{\PYZhy{}} \PY{n}{N}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+            \PY{k}{return} \PY{n}{total}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{population}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+            \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x10f0a7b38>
+    \end{verbatim}
+
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{NumPy}\label{numpy}
+
+You should be able to understand the code in the following cells. If
+not, please review the following:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://ds100.org/fa17/assets/notebooks/numpy/Numpy_Review.html}{UC
+  Berkeley DS100 NumPy Review}
+\item
+  \href{http://cs231n.github.io/python-numpy-tutorial/\#numpy}{Stanford
+  Condensed NumPy Review}
+\item
+  \href{https://docs.scipy.org/doc/numpy-dev/user/quickstart.html}{The
+  Official NumPy Tutorial}
+\item
+  \href{https://www.inferentialthinking.com/chapters/05/1/Arrays}{UC
+  Berkeley Data 8 Textbook Chapter on NumPy}
+\end{itemize}
+
+    \textbf{Jupyter pro-tip}: Pull up the docs for any function in Jupyter
+by running a cell with the function name and a \texttt{?} at the end:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} np.arange\PY{o}{?}
+\end{Verbatim}
+
+
+    You can close the window at the bottom by pressing \texttt{esc} several
+times.
+
+    \textbf{Another Jupyter pro-tip}: Pull up the docs for any function in
+Jupyter by typing the function name, then
+\texttt{\textless{}Shift\textgreater{}-\textless{}Tab\textgreater{}} on
+your keyboard. This is super convenient when you forget the order of the
+arguments to a function. You can press
+\texttt{\textless{}Tab\textgreater{}} multiple times to expand the docs
+and reveal additional information.
+
+Try it on the function below:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}
+\end{Verbatim}
+
+
+    Now, let's go through some linear algebra coding questions with NumPy.
+In this question, we'll ask you to use your linear algebra knowledge to
+fill in NumPy matrices. To conduct matrix multiplication in NumPy, you
+should write code like the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} A matrix in NumPy is a 2\PYZhy{}dimensional NumPy array}
+         \PY{n}{matA} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{matB} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{]}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} The notation B @ v means: compute the matrix multiplication Bv}
+         \PY{n}{matA} \PY{o}{@} \PY{n}{matB}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} array([[ 76,  82],
+                [184, 199]])
+\end{Verbatim}
+            
+    You can also use the same syntax to do matrix-vector multiplication or
+vector dot products. Handy!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{matA} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+         \PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} A vector in NumPy is simply a 1\PYZhy{}dimensional NumPy array}
+         \PY{n}{some\PYZus{}vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{,} \PY{p}{]}\PY{p}{)}
+         \PY{n}{another\PYZus{}vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30} \PY{p}{]}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{matA} \PY{o}{@} \PY{n}{some\PYZus{}vec}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{some\PYZus{}vec} \PY{o}{@} \PY{n}{another\PYZus{}vec}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 76 184]
+760
+
+    \end{Verbatim}
+
+    \subsection{Question 2 (4 pt)}\label{question-2-4-pt}
+
+\subsubsection{Question 2a}\label{question-2a}
+
+Joey, Deb, and Sam are shopping for fruit at K-Bowl. K-Bowl, true to its
+name, only sells fruit bowls. A fruit bowl contains some fruit and the
+price of a fruit bowl is the total price of all of its individual fruit.
+
+Berkeley Bowl has apples for \textbackslash{}\$2.00, bananas for
+\textbackslash{}\$1.00, and cantaloupes for \textbackslash{}\$4.00
+(expensive!). The price of each of these can be written in a vector:
+
+\[
+v = \begin{bmatrix}
+     2 \\
+     1 \\
+     4 \\
+\end{bmatrix}
+\]
+
+K-Bowl sells the following fruit bowls:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  2 of each fruit
+\item
+  5 apples and 8 bananas
+\item
+  2 bananas and 3 cantaloupes
+\item
+  10 cantaloupes
+\end{enumerate}
+
+Create a 2-dimensional numpy array encoding the matrix \(B\) such that
+the matrix-vector multiplication
+
+\[
+Bv
+\]
+
+evaluates to a length 4 column vector containing the price of each fruit
+bowl. The first entry of the result should be the cost of fruit bowl
+\#1, the second entry the cost of fruit bowl \#2, etc.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{n}{B} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}
+         \PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} END YOUR CODE}
+         
+         \PY{c+c1}{\PYZsh{} The notation B @ v means: compute the matrix multiplication Bv}
+         \PY{n}{B} \PY{o}{@} \PY{n}{v}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} array([14, 18, 14, 40])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q2a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x1125de358>
+    \end{verbatim}
+
+    
+    \subsubsection{Question 2b}\label{question-2b}
+
+Joey, Deb, and Sam make the following purchases:
+
+\begin{itemize}
+\tightlist
+\item
+  Joey buys 2 fruit bowl \#1s and 1 fruit bowl \#2.
+\item
+  Deb buys 1 of each fruit bowl.
+\item
+  Sam buys 10 fruit bowl \#4s (he really like cantaloupes).
+\end{itemize}
+
+Create a matrix \(A\) such that the matrix expression
+
+\[
+ABv
+\]
+
+evaluates to a length 3 column vector containing how much each of them
+spent. The first entry of the result should be the total amount spent by
+Joey, the second entry the amount sent by Deb, etc.
+
+Note that the tests for this question do not tell you whether your
+answer is correct. That's up to you to determine.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+             \PY{c+c1}{\PYZsh{} Finish this!}
+             \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+             \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+             \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+             \PY{c+c1}{\PYZsh{} END YOUR CODE}
+         \PY{p}{]}\PY{p}{)} 
+         
+         \PY{n}{A} \PY{o}{@} \PY{n}{B} \PY{o}{@} \PY{n}{v} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} array([ 46,  86, 400])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q2b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x1125d9588>
+    \end{verbatim}
+
+    
+    \subsubsection{Question 2c}\label{question-2c}
+
+Who spent the most money? Assign \texttt{most} to a string containing
+the name of this person.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{n}{most} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sam}\PY{l+s+s2}{\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q2c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x1125de978>
+    \end{verbatim}
+
+    
+    \subsubsection{Question 2d}\label{question-2d}
+
+Let's suppose K-Bowl changes their fruit prices, but you don't know what
+they changed their prices to. Joey, Deb, and Sam buy the same quantity
+of fruit baskets and the number of fruit in each basket is the same, but
+now they each spent these amounts:
+
+\[
+x = \begin{bmatrix}
+    80 \\
+    80 \\
+    100 \\
+\end{bmatrix}
+\]
+
+Use \texttt{np.linalg.inv} and the above final costs to compute the new
+prices for the individual fruits as a vector called \texttt{new\_v}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{80}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         \PY{n}{new\PYZus{}v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A} \PY{o}{@} \PY{n}{B}\PY{p}{)} \PY{o}{@} \PY{n}{x}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} END YOUR CODE}
+         \PY{n}{new\PYZus{}v}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} array([ 5.5       ,  2.20833333,  1.        ])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{tmp} \PY{o}{=} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q2d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x1125d9b38>
+    \end{verbatim}
+
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Multivariable Calculus, Linear Algebra, and
+Probability}\label{multivariable-calculus-linear-algebra-and-probability}
+
+The following questions ask you to recall your knowledge of
+multivariable calculus, linear algebra, and probability. We will use
+some of the most fundamental concepts from each discipline in this
+class, so the following problems should at least seem familiar to you.
+
+If you have trouble with these topics, we suggest reviewing:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.khanacademy.org/math/multivariable-calculus}{Khan
+  Academy's Multivariable Calculus}
+\item
+  \href{https://www.khanacademy.org/math/linear-algebra}{Khan Academy's
+  Linear Algebra}
+\item
+  \href{https://www.khanacademy.org/math/statistics-probability}{Khan
+  Academy's Statistics and Probability}
+\end{itemize}
+
+\paragraph{LaTeX}\label{latex}
+
+For the following problems, you should use LaTeX to format your answer.
+If you aren't familiar with LaTeX, not to worry. It's not hard to use in
+a Jupyter notebook. Just place your math in between dollar signs:
+
+\textbackslash{}\$ f(x) = 2x \textbackslash{}\$ becomes \$ f(x) = 2x \$.
+
+If you have a longer equation, use double dollar signs to place it on a
+line by itself:
+
+\textbackslash{}\(\\\) \sum\_\{i=0\}\^{}n i\^{}2 \textbackslash{}\(\\\)
+becomes:
+
+\[ \sum_{i=0}^n i^2 \].
+
+Here is some handy notation:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
+Output\strut
+\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
+Latex\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[x^{a + b}\]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{x\^{}\{a\ +\ b\}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[x_{a + b}\]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{x\_\{a\ +\ b\}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[\frac{a}{b}\]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{\textbackslash{}frac\{a\}\{b\}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[\sqrt{a + b}\]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{\textbackslash{}sqrt\{a\ +\ b\}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[\{ \alpha, \beta, \gamma, \pi, \mu, \sigma^2  \}\]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{\textbackslash{}\{\ \textbackslash{}alpha,\ \textbackslash{}beta,\ \textbackslash{}gamma,\ \textbackslash{}pi,\ \textbackslash{}mu,\ \textbackslash{}sigma\^{}2\ \ \textbackslash{}\}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[\sum_{x=1}^{100}\]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{\textbackslash{}sum\_\{x=1\}\^{}\{100\}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[\frac{\partial}{\partial x} \]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{\textbackslash{}frac\{\textbackslash{}partial\}\{\textbackslash{}partial\ x\}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\[\begin{bmatrix} 2x + 4y \\ 4x + 6y^2 \\ \end{bmatrix}\]\strut
+\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\texttt{\textbackslash{}begin\{bmatrix\}\ 2x\ +\ 4y\ \textbackslash{}\textbackslash{}\ 4x\ +\ 6y\^{}2\ \textbackslash{}\textbackslash{}\ \textbackslash{}end\{bmatrix\}}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\href{https://www.sharelatex.com/learn/Mathematical_expressions}{For
+more about basic LaTeX formatting, you can read this article.}
+
+    \subsubsection{Question 3a (4 pt)}\label{question-3a-4-pt}
+
+Suppose we have the following scalar-valued function:
+
+\[ f(x, y) = x^2 + 4xy + 2y^3 + e^{-3y} + \ln(2y) \]
+
+Compute the partial derivative \(\frac{\partial}{\partial x} f(x,y)\):
+
+    Answer: \(2x + 4y\)
+
+    Now compute the partial derivative
+\(\frac{\partial}{\partial y} f(x,y)\):
+
+    Answer: \(4x + 6y^2 + \frac{1}{y} - 3e^{-3y}\)
+
+    Finally, using your answers to the above two parts, compute
+\(\nabla f(x, y)\). Also what is the gradient at the point (x, y) = (2,
+-1):
+
+Note that \(\nabla\) represents the gradient.
+
+    Answer:
+\(\nabla f(x, y) = (2x + 4y)i + (4x + 6y^2 + \frac{1}{y} - 3e^{-3y})j = (2x + 4y, 4x + 6y^2 + \frac{1}{y} - 3e^{-3y})\)
+
+\(\nabla f(2, -1) = (2(2) + 4(-1), 4(2) + 6(-1)^2 + \frac{1}{-1} - 3e^{-3(-1)}) = (4 - 4, 8 + 6 - 1 - 3e^3) = (0, 13-3e^3)\)
+
+    \subsubsection{Question 3b (2 pt)}\label{question-3b-2-pt}
+
+Find the value(s) of \(x\) which minimizes the expression below. Justify
+why it is the minimum.
+
+\(\sum_{i=1}^{10} (i - x)^2\)
+
+    Answer:
+\texttt{i\ can\ be\ 1,2,3,4,5,6,7,8,9,10.\ The\ median\ of\ these\ values\ is\ 5.5\ and\ the\ median\ will\ minimize\ the\ expression\ so\ x\ =\ 5.5}
+
+Let \(f(x) = \sum_{i=1}^{10} (i - x)^2\)
+
+\(f'(x) = -2\sum_{i=1}^{10} (i - x) = -2(55 - 10x) = 0\)
+
+\(x = 5.5\)
+
+    \subsubsection{Question 4a (2 pt)}\label{question-4a-2-pt}
+
+Let \(\sigma(x) = \dfrac{1}{1+e^{-x}}\).
+
+Show that \(\sigma(-x) = 1 - \sigma(x)\).
+
+    Answer:
+
+\(\sigma(-x) = \dfrac{1}{1+e^{-(-x)}} = \dfrac{1}{1+e^{x}}\)
+
+\(1 - \sigma(x) = 1 - \dfrac{1}{1+e^{-x}} = \dfrac{1+e^{-x}-1}{1+e^{-x}} = \dfrac{e^{-x}}{1+e^{-x}} = \dfrac{\dfrac{1}{e^x}}{1+\dfrac{1}{e^x}} = \dfrac{\dfrac{1}{e^x}}{\dfrac{e^x+1}{e^x}} = \dfrac{1}{e^x+1}\)
+
+\$ \sigma(-x) = 1 - \sigma(x) \$
+
+    \subsubsection{Question 4b (2 pt)}\label{question-4b-2-pt}
+
+Show that the derivative can be written as:
+
+\[\frac{d}{dx}\sigma(x) = \sigma(x)(1 - \sigma(x))\]
+
+    Answer:
+
+\$\frac{d}{dx}\sigma(x) = \frac{d}{dx}(\dfrac{1}{1+e^{-x}}) =
+\frac{d}{dx}(\dfrac{e^x}{e^x+1}) \$
+
+\$= \dfrac{(e^x+1)e^x - e^x(e^x)}{(e^x+1)^2} \$
+
+\$= \dfrac{e^2x+e^x - e^2x}{(e^x+1)^2} \$
+
+\$= \dfrac{e^x}{(e^x+1)^2} \$
+
+\$\sigma(x)(1 - \sigma(x)) = (\dfrac{1}{1+e^{-x}})(\dfrac{1}{1+e^{x}}) =
+(\dfrac{e^x}{e^x+1})(\dfrac{1}{1+e^{x}}) = \dfrac{e^x}{(e^x+1)^2} \$
+
+\(\frac{d}{dx}\sigma(x) = \sigma(x)(1 - \sigma(x))\)
+
+    \subsubsection{Question 5 (2 pt)}\label{question-5-2-pt}
+
+Consider the following scenario:
+
+Only 1\% of 40-year-old women who participate in a routine mammography
+test have breast cancer. 80\% of women who have breast cancer will test
+positive, but 9.6\% of women who don't have breast cancer will also get
+positive tests.
+
+Suppose we know that a woman of this age tested positive in a routine
+screening. What is the probability that she actually has breast cancer?
+
+\textbf{Hint:} Use Bayes' rule.
+
+    Answer: P(Has cancer) = 0.01
+
+P(Test positive \textbar{} has cancer) = 0.8
+
+P(Test positive \textbar{} has no cancer) = 0.096
+
+P(Has cancer \textbar{} test positive) = ?
+
+P(A\textbar{}B) = P(B\textbar{}A)P(A) / P(B)
+
+P(Has cancer \textbar{} test positive) = P(Test positive \textbar{} has
+cancer) x P(Has cancer) / P(Test positive)
+
+= 0.8 x 0.01 / (0.8 x 0.01 + 0.096 x 0.99) = 0.8 x 0.01 / 0.10304
+
+= 0.07763975155
+
+= 7.8\%
+
+    \subsubsection{Question 6}\label{question-6}
+
+Consider (once again) a sample of size n drawn at random with
+replacement from a population in which a proportion p of the individuals
+are called successes.
+
+Let S be the random variable that denotes the number of successes in our
+sample. (As stated above, S follows the binomial distribution.) Then,
+the probability that the number of successes in our sample is \textbf{at
+most} s (where \(0 \leq s \leq n\)) is
+
+\[P(S \leq s) = P(S = 0) + P(S = 1) + ... + P(S = s) = \sum_{k=0}^s \binom{n}{k}p^k(1-p)^{n-k}\]
+
+We obtain this by summing the probability that the number of successes
+is exactly k, for each value of \(k = 0, 1, 2, ..., s\).
+
+    \subsubsection{Question 6a (2pt)}\label{question-6a-2pt}
+
+Please fill in the function \texttt{prob\_at\_most} which takes n, p,
+and s and returns \(P(S \le s)\) as defined above. If the inputs are
+invalid: for instance, if p \textgreater{} 1 or s \textgreater{} n then
+return 0."
+
+\textbf{Hint}: One way to compute the binomial coefficients is to use
+SciPy module, which is a collection of Python-based software for math,
+probability, statistics, science, and enginnering. Feel free to use
+\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.comb.html\#scipy.special.comb}{scipy.special.comb}**
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{special}
+         
+         \PY{k}{def} \PY{n+nf}{prob\PYZus{}at\PYZus{}most}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{s}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} }
+         \PY{l+s+sd}{    returns the probability of S \PYZlt{}= s}
+         \PY{l+s+sd}{    Input n: sample size; p : proportion; s: number of successes at most}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+             \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+             \PY{k}{if}\PY{p}{(}\PY{n}{p} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{s} \PY{o}{\PYZgt{}} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mi}{0}
+             \PY{n}{total} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{s} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{special}\PY{o}{.}\PY{n}{comb}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{i}\PY{p}{)} \PY{o}{*} \PY{n}{p}\PY{o}{*}\PY{o}{*}\PY{n}{i} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{total}
+             \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+             \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q6a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x1125d7c88>
+    \end{verbatim}
+
+    
+    \subsubsection{Question 6b (1pt)}\label{question-6b-1pt}
+
+In an election, supporters of Candidate C are in a minority. Only 45\%
+of the voters in the population favor the candidate.
+
+Suppose a survey organization takes a sample of 200 voters at random
+with replacement from this population. Use \texttt{prob\_at\_most} to
+write an expression that evaluates to the chance that a majority (more
+than half) of the sampled voters favor Candidate C.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{n}{p\PYZus{}majority} \PY{o}{=} \PY{n}{prob\PYZus{}at\PYZus{}most}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mf}{0.45}\PY{p}{,}\PY{l+m+mi}{101}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+         \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q6b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x151f334e80>
+    \end{verbatim}
+
+    
+    \subsubsection{Question 6c (1pt)}\label{question-6c-1pt}
+
+Suppose each of five survey organizations takes a sample of voters at
+random with replacement from the population of voters in Part
+\textbf{b}, independently of the samples drawn by the other
+organizations.
+
+\begin{itemize}
+\tightlist
+\item
+  Three of the organizations use a sample size of 200
+\item
+  One organization uses a sample size of 300
+\item
+  One organization uses a sample size of 400
+\end{itemize}
+
+Write an expression that evaluates to the chance that in at least one of
+the five samples the majority of voters favor Candidate C. You can use
+any quantity or function defined earlier in this exercise.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+          \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{n}{prob\PYZus{}of\PYZus{}favor\PYZus{}C} \PY{o}{=} \PY{p}{[}\PY{n}{prob\PYZus{}at\PYZus{}most}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{l+m+mf}{0.45}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{i}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{,} \PY{l+m+mi}{300}\PY{p}{,} \PY{l+m+mi}{400}\PY{p}{]}\PY{p}{]}
+          \PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}favor\PYZus{}C} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{prob\PYZus{}of\PYZus{}favor\PYZus{}C}\PY{p}{]}
+          \PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}C} \PY{o}{=} \PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}favor\PYZus{}C}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}favor\PYZus{}C}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}favor\PYZus{}C}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{*}\PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}favor\PYZus{}C}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{*}\PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}favor\PYZus{}C}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+          \PY{n}{prob\PYZus{}6c} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{prob\PYZus{}of\PYZus{}no\PYZus{}C}
+          \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q6c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        AssertionError                            Traceback (most recent call last)
+
+        <ipython-input-137-45e1533f8d16> in <module>()
+    ----> 1 ok.grade("q6c");
+    
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/client/api/notebook.py in grade(self, question, global\_env)
+         56             \# inspect trick to pass in its parents' global env.
+         57             global\_env = inspect.currentframe().f\_back.f\_globals
+    ---> 58         result = grade(path, global\_env)
+         59         \# We display the output if we're in IPython.
+         60         \# This keeps backwards compatibility with okpy's grade method
+
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/okgrade/grader.py in grade(test\_file\_path, global\_env)
+         59     Returns a TestResult object.
+         60     """
+    ---> 61     tests = parse\_ok\_test(test\_file\_path)
+         62     if global\_env is None:
+         63         \# Get the global env of our callers - one level below us in the stack
+
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/okgrade/grader.py in parse\_ok\_test(path)
+         24 
+         25     \# Do not support point values other than 1
+    ---> 26     assert test\_spec.get('points', 1) == 1
+         27 
+         28     test\_suite = test\_spec['suites'][0]
+
+
+        AssertionError: 
+
+    \end{Verbatim}
+
+    \subsection{The US Presidential
+Election}\label{the-us-presidential-election}
+
+The US president is chosen by the Electoral College, not by the popular
+vote. Each state is alotted a certain number of electoral college votes,
+as a function of their population. Whomever wins in the state gets all
+of the electoral college votes for that state.
+
+There are 538 electoral college votes (hence the name of the Nate
+Silver's site, FiveThirtyEight).
+
+Pollsters correctly predicted the election outcome in 46 of the 50
+states. For these 46 states Trump received 231 and Clinton received 232
+electoral college votes.
+
+The remaining 4 states accounted for a total of 75 votes, and whichever
+candidate received the majority of the electoral college votes in these
+states would win the election.
+
+These states were Florida, Michigan, Pennsylvania, and Wisconsin.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+State & Electoral College Votes\tabularnewline
+\midrule
+\endhead
+Florida & 29\tabularnewline
+Michigan & 16\tabularnewline
+Pennsylvania & 20\tabularnewline
+Wisconsin & 10\tabularnewline
+\bottomrule
+\end{longtable}
+
+For Donald Trump to win the election, he had to win either: * Florida +
+one (or more) other states * Michigan, Pennsylvania, and Wisconsin
+
+The electoral margins were very narrow in these four states, as seen
+below:
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+State & Trump & Clinton & Total Voters\tabularnewline
+\midrule
+\endhead
+Florida & 49.02 & 47.82 & 9,419,886\tabularnewline
+Michigan & 47.50 & 47.27 & 4,799,284\tabularnewline
+Pennsylvania & 48.18 & 47.46 & 6,165,478\tabularnewline
+Wisconsin & 47.22 & 46.45 & 2,976,150\tabularnewline
+\bottomrule
+\end{longtable}
+
+Those narrow electoral margins can make it hard to predict the outcome
+given the sample sizes that the polls used.
+
+    \subsubsection{Question 7a (1pt)}\label{question-7a-1pt}
+
+For your convenience, the results of the vote in the four pivotal states
+is repeated below:
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+State & Trump & Clinton & Total Voters\tabularnewline
+\midrule
+\endhead
+Florida & 49.02 & 47.82 & 9,419,886\tabularnewline
+Michigan & 47.50 & 47.27 & 4,799,284\tabularnewline
+Pennsylvania & 48.18 & 47.46 & 6,165,478\tabularnewline
+Wisconsin & 47.22 & 46.45 & 2,976,150\tabularnewline
+\bottomrule
+\end{longtable}
+
+Using the table above, write a function
+\texttt{draw\_state\_sample(N,\ state)} that returns a sample with
+replacement of N voters from the given state. Your result should be
+returned as a list, where the first element is the number of Trump
+votes, the second element is the number of Clinton votes, and the third
+is the number of Other votes. For example,
+\texttt{draw\_state\_sample(1500,\ "florida")} could return
+\texttt{{[}727,\ 692,\ 81{]}}. You may assume that the state name is
+given in all lower case.
+
+You might find \texttt{np.random.multinomial} useful.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}189}]:} \PY{k}{def} \PY{n+nf}{draw\PYZus{}state\PYZus{}sample}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+              \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+              \PY{k}{if} \PY{n}{state} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{florida}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{49.02}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mf}{47.82}\PY{o}{/}\PY{l+m+mi}{100}
+              \PY{k}{elif} \PY{n}{state} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{michigan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{47.50}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mf}{47.27}\PY{o}{/}\PY{l+m+mi}{100}
+              \PY{k}{elif} \PY{n}{state} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pennsylvania}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{48.18}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mf}{47.46}\PY{o}{/}\PY{l+m+mi}{100}
+              \PY{k}{elif} \PY{n}{state} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wisconsin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n}{a}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mf}{47.22}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mf}{46.45}\PY{o}{/}\PY{l+m+mi}{100}
+              \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{n}{a} \PY{o}{+} \PY{n}{b}\PY{p}{)}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multinomial}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{p}{[}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{n}{c}\PY{p}{]}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+              \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}190}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q7a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        AssertionError                            Traceback (most recent call last)
+
+        <ipython-input-190-8f8211f1239a> in <module>()
+    ----> 1 ok.grade("q7a");
+    
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/client/api/notebook.py in grade(self, question, global\_env)
+         56             \# inspect trick to pass in its parents' global env.
+         57             global\_env = inspect.currentframe().f\_back.f\_globals
+    ---> 58         result = grade(path, global\_env)
+         59         \# We display the output if we're in IPython.
+         60         \# This keeps backwards compatibility with okpy's grade method
+
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/okgrade/grader.py in grade(test\_file\_path, global\_env)
+         59     Returns a TestResult object.
+         60     """
+    ---> 61     tests = parse\_ok\_test(test\_file\_path)
+         62     if global\_env is None:
+         63         \# Get the global env of our callers - one level below us in the stack
+
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/okgrade/grader.py in parse\_ok\_test(path)
+         24 
+         25     \# Do not support point values other than 1
+    ---> 26     assert test\_spec.get('points', 1) == 1
+         27 
+         28     test\_suite = test\_spec['suites'][0]
+
+
+        AssertionError: 
+
+    \end{Verbatim}
+
+    \subsubsection{Question 7b (1pt)}\label{question-7b-1pt}
+
+Now, create a function \texttt{trump\_advantage} that takes in a sample
+of votes (like the one returned by \texttt{draw\_state\_sample}) and
+returns the difference in the proportion of votes between Trump and
+Clinton. For example \texttt{trump\_advantage({[}100,\ 60,\ 40{]})}
+would return \texttt{0.2}, since Trump had 50\% of the votes in this
+sample and Clinton had 30\%.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}193}]:} \PY{k}{def} \PY{n+nf}{trump\PYZus{}advantage}\PY{p}{(}\PY{n}{voter\PYZus{}sample}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+              \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+              \PY{k}{return} \PY{p}{(}\PY{n}{voter\PYZus{}sample}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{voter\PYZus{}sample}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{voter\PYZus{}sample}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+              \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}194}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q7b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x151f39d198>
+    \end{verbatim}
+
+    
+    \subsubsection{Question 7c (1pt)}\label{question-7c-1pt}
+
+Simulate Trump's advantage across 100,000 samples of 1500 voters for the
+state of Pennsylvania and store the results of each simulation in a list
+called \texttt{simulations}.
+
+That is, \texttt{simulations{[}i{]}} should be Trump's proportion
+advantage for the \texttt{i+1}th simple random sample.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+          \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{n}{simulations} \PY{o}{=} \PY{p}{[}\PY{n}{trump\PYZus{}advantage}\PY{p}{(}\PY{n}{draw\PYZus{}state\PYZus{}sample}\PY{p}{(}\PY{l+m+mi}{1500}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pennsylvania}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100000}\PY{p}{)}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q7c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x151f39d908>
+    \end{verbatim}
+
+    
+    \subsubsection{Question 7d (1pt)}\label{question-7d-1pt}
+
+Now write a function \texttt{trump\_wins(N)} that creates a sample of N
+voters for each of the four crucial states (Florida, Michigan,
+Pennsylvania, and Wisconsin) and returns 1 if Trump is predicted to win
+based on these samples and 0 if Trump is predicted to lose.
+
+Recall that for Trump to win the election, he must either: * Win the
+state of Florida and 1 or more other states * Win Michigan,
+Pennsylvania, and Wisconsin
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{k}{def} \PY{n+nf}{trump\PYZus{}wins}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+              \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+              \PY{n}{f} \PY{o}{=} \PY{n}{trump\PYZus{}advantage}\PY{p}{(}\PY{n}{draw\PYZus{}state\PYZus{}sample}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{florida}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n}{m} \PY{o}{=} \PY{n}{trump\PYZus{}advantage}\PY{p}{(}\PY{n}{draw\PYZus{}state\PYZus{}sample}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{michigan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n}{p} \PY{o}{=} \PY{n}{trump\PYZus{}advantage}\PY{p}{(}\PY{n}{draw\PYZus{}state\PYZus{}sample}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pennsylvania}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{n}{w} \PY{o}{=} \PY{n}{trump\PYZus{}advantage}\PY{p}{(}\PY{n}{draw\PYZus{}state\PYZus{}sample}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wisconsin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{k}{if} \PY{p}{(}\PY{n}{f}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{p}{(}\PY{n}{m}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{p}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{or} \PY{n}{w}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)} \PY{o+ow}{or} \PY{p}{(}\PY{n}{m}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{p}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{w}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{return} \PY{l+m+mi}{1}
+              \PY{k}{return} \PY{l+m+mi}{0}
+              \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+              \PY{c+c1}{\PYZsh{} END YOUR CODE}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}220}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q7d}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        AssertionError                            Traceback (most recent call last)
+
+        <ipython-input-220-8daf74a6ad4d> in <module>()
+    ----> 1 ok.grade("q7d");
+    
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/client/api/notebook.py in grade(self, question, global\_env)
+         56             \# inspect trick to pass in its parents' global env.
+         57             global\_env = inspect.currentframe().f\_back.f\_globals
+    ---> 58         result = grade(path, global\_env)
+         59         \# We display the output if we're in IPython.
+         60         \# This keeps backwards compatibility with okpy's grade method
+
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/okgrade/grader.py in grade(test\_file\_path, global\_env)
+         59     Returns a TestResult object.
+         60     """
+    ---> 61     tests = parse\_ok\_test(test\_file\_path)
+         62     if global\_env is None:
+         63         \# Get the global env of our callers - one level below us in the stack
+
+
+        \textasciitilde{}/anaconda3/envs/data100/lib/python3.6/site-packages/okgrade/grader.py in parse\_ok\_test(path)
+         24 
+         25     \# Do not support point values other than 1
+    ---> 26     assert test\_spec.get('points', 1) == 1
+         27 
+         28     test\_suite = test\_spec['suites'][0]
+
+
+        AssertionError: 
+
+    \end{Verbatim}
+
+    \subsubsection{Question 7e}\label{question-7e}
+
+If we repeat 100,000 simulations of the election, i.e. we call
+\texttt{trump\_wins(1500)} 100,000 times, what proportion of these
+simulations predict a Trump victory? Give your answer as
+\texttt{proportion\_trump}.
+
+This number represents the percent chance that a given sample will
+correctly predict Trump's victory \emph{even if the sample was collected
+with absolutely no bias}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{c+c1}{\PYZsh{} BEGIN YOUR CODE}
+          \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{n}{proportion\PYZus{}trump} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{trump\PYZus{}wins}\PY{p}{(}\PY{l+m+mi}{1500}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100000}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{100000}
+          \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+          \PY{c+c1}{\PYZsh{} END YOUR CODE}
+          \PY{n}{proportion\PYZus{}trump}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}225}]:} 0.69423
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q7e}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<okgrade.result.TestResult at 0x1125935f8>
+    \end{verbatim}
+
+    
+    \subsubsection{Congratulations! You have completed
+HW1.}\label{congratulations-you-have-completed-hw1.}
+
+Make sure you have run all cells in your notebook in order before
+running the cell below, so that all images/graphs appear in the output.,
+
+\textbf{Please save before submitting!}
+
+    For your convenience, you can run this cell to run all the tests at
+once!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{io}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:5\PYZcb{}}\PY{l+s+s1}{|}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}:6\PYZcb{}}\PY{l+s+s1}{|}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}:6\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Passed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Failed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k}{for} \PY{n}{q} \PY{o+ow}{in} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tests}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{n}{q}\PY{o}{.}\PY{n}{startswith}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o+ow}{and} \PY{n+nb}{len}\PY{p}{(}\PY{n}{q}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{10}\PY{p}{:}
+                  \PY{k}{with} \PY{n}{io}\PY{o}{.}\PY{n}{capture\PYZus{}output}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{captured}\PY{p}{:}
+                      \PY{n}{score} \PY{o}{=} \PY{n}{ok}\PY{o}{.}\PY{n}{grade}\PY{p}{(}\PY{n}{q}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:5\PYZcb{}}\PY{l+s+s1}{|}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}:6\PYZcb{}}\PY{l+s+s1}{|}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+si}{\PYZob{}:6\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{q}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{score}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{passed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{score}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Q    |	Passed|	Failed
+------------------------
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-227-29bc21abedad> in <module>()
+          8         with io.capture\_output() as captured:
+          9             score = ok.grade(q[:-3]);
+    ---> 10         print('\{:5\}|\textbackslash{}t\{:6\}|\textbackslash{}t\{:6\}'.format(q[:-3], score['passed'], score['failed']))
+    
+
+        TypeError: 'TestResult' object is not subscriptable
+
+    \end{Verbatim}
+
+    Please generate pdf as follows and submit it to Gradescope.
+
+\textbf{File \textgreater{} Print Preview \textgreater{} Print
+\textgreater{} Save as pdf}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
